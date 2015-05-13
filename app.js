@@ -17,6 +17,7 @@ function showArticle(req, res) {
     var articlePath = 'public/article-' + articleVersion + '.html';
     fs.readFile(articlePath, function(err, data) {
       if (err) return res.status(500).send(err);
+      res.append('Article-Version', articleVersion);
       res.send(data);
     });
   });
