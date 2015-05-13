@@ -4,7 +4,9 @@ var app = express();
 var redis = require('redis'),
     client = redis.createClient();
 
-app.get('/api/v1/articles/1', function(req, res) {
+app.get('/api/v1/articles/1', showArticle);
+
+function showArticle(req, res) {
   client.get('article-version', function(err, articleVersion) {
     var articlePath = 'public/article-' + articleVersion + '.html';
     fs.readFile(articlePath, function(err, data) {
@@ -12,7 +14,7 @@ app.get('/api/v1/articles/1', function(req, res) {
       res.send(data);
     });
   });
-});
+}
 
 var server = app.listen(3000, function() {
   var host = server.address().address;
