@@ -26,6 +26,12 @@ function showArticle(req, res) {
 function updateArticle(req, res) {
   client.get('article-1-version', function(err, reply) {
     var articleVersion = parseInt(reply);
+    var updateVersion = parseInt(req.body.version);
+
+    if (updateVersion != articleVersion) {
+      return res.status(409).send('edit conflict');
+    }
+
     var newVersion = articleVersion + 1
     var articlePath = 'public/article-' + newVersion + '.html';
     fs.writeFile(articlePath, req.body.html, function(err, data) {
