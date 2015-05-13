@@ -9,4 +9,4 @@ Run
 
 Tests
 ---------
-    curl http://localhost:3000/articles/1
+    curl http://localhost:3000/api/v1/articles/1

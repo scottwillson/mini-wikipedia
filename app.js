@@ -2,7 +2,7 @@ var fs = require('fs');
 var express = require('express');
 var app = express();
 
-app.get('/articles/1', function(req, res) {
+app.get('/api/v1/articles/1', function(req, res) {
   fs.readFile('public/article.html', function(err, data) {
     if (err) return res.status(500).send(err);
     res.send(data);
