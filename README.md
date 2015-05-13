@@ -12,7 +12,10 @@ Install Ruby 2+ (for concurrency tests)
 
 Run
 ---
+    grunt
     node app.js
+
+Grunt clears public dir and resets lock counter in Redis.
 
 Tests
 ---------
