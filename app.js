@@ -23,9 +23,12 @@ function showArticle(req, res) {
 }
 
 function updateArticle(req, res) {
-  client.get('article-1-version', function(err, articleVersion) {
-    var articlePath = 'public/article-' + articleVersion + '.html';
+  client.get('article-1-version', function(err, reply) {
+    var articleVersion = parseInt(reply);
+    var newVersion = articleVersion + 1
+    var articlePath = 'public/article-' + newVersion + '.html';
     fs.writeFile(articlePath, req.body.html, function(err, data) {
+      client.set('article-1-version', newVersion);
       res.send('OK');
     });
   });
