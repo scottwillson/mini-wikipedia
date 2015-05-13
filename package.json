@@ -1,0 +1,11 @@
+{
+  "name": "mini-wikipedia",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scottwillson/mini-wikipedia.git"
+  },
+  "dependencies": {
+    "express": "^4.12.3"
+  }
+}
