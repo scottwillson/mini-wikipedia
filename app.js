@@ -1,8 +1,12 @@
+var fs = require('fs');
 var express = require('express');
 var app = express();
 
 app.get('/articles/1', function(req, res) {
-  res.send('OK');
+  fs.readFile('public/article.html', function(err, data) {
+    if (err) return res.status(500).send(err);
+    res.send(data);
+  });
 });
 
 var server = app.listen(3000, function() {
