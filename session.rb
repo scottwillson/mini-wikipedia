@@ -1,6 +1,6 @@
 CelluloidBenchmark::Session.define do
   20.times do
-    if rand < 0.01
+    if rand < 0.001
       benchmark :article_show, 0.5
       page = get("http://localhost:3000/api/v1/articles/1")
       version = page["article-version"]
