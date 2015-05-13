@@ -14,6 +14,7 @@ app.get('/api/v1/articles/1', showArticle);
 app.post('/api/v1/articles/1', updateArticle);
 
 function showArticle(req, res) {
+  fibonacci(34);
   client.get('article-1-version', function(err, articleVersion) {
     var articlePath = 'public/article-' + articleVersion + '.html';
     fs.readFile(articlePath, function(err, data) {
@@ -50,6 +51,14 @@ function updateArticle(req, res) {
     });
   });
 }
+
+function fibonacci(n) {
+  if (n <= 2) {
+    return 1;
+  } else {
+    return fibonacci(n - 1) + fibonacci(n - 2);
+  }
+};
 
 var server = app.listen(3000, function() {
   var host = server.address().address;
