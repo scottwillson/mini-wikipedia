@@ -24,3 +24,5 @@ Tests
     celluloid-benchmark -d 20 -v 4
 
 Celluloid-benchmark is a concurrent, stateful, scriptable load test tool. -d is duration in second -v is number of concurrent visitors. Test is in session.rb.
+
+It *should* show ERR for the update under moderate concurrency. Some editors are going to try stale updates, and they'll get 409s returned.

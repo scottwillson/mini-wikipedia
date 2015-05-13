@@ -4,6 +4,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var redis = require('redis'),
     client = redis.createClient();
+var lock = require('redis-lock')(client);
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -32,11 +33,20 @@ function updateArticle(req, res) {
       return res.status(409).send('edit conflict');
     }
 
-    var newVersion = articleVersion + 1
-    var articlePath = 'public/article-' + newVersion + '.html';
-    fs.writeFile(articlePath, req.body.html, function(err, data) {
-      client.set('article-1-version', newVersion);
-      res.send('OK');
+    lock('article-1-lock', function(done) {
+      client.get('article-1-version', function(err, reply) {
+        var articleVersion = parseInt(reply);
+        if (updateVersion != articleVersion) {
+          return res.status(409).send('edit conflict');
+        }
+        var newVersion = articleVersion + 1
+        var articlePath = 'public/article-' + newVersion + '.html';
+        fs.writeFile(articlePath, req.body.html, function(err, data) {
+          client.set('article-1-version', newVersion);
+          res.send('OK');
+          done();
+        });
+      });
     });
   });
 }

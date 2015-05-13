@@ -12,6 +12,7 @@
     "grunt-contrib-clean": "0.6.0",
     "grunt-contrib-copy": "0.8.0",
     "hiredis": "0.3.0",
-    "redis": "0.12.1"
+    "redis": "0.12.1",
+    "redis-lock": "0.1.0"
   }
 }
